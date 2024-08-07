@@ -1,5 +1,6 @@
 import re
 from os import environ
+from Script import script
 
 id_pattern = re.compile(r'^.\d+$')
 def is_enabled(value, default):
@@ -10,14 +11,14 @@ def is_enabled(value, default):
     else:
         return default
 
-req1 = environ.get('AUTH_CHANNEL1', '-1001977356379')
-req2 = environ.get('AUTH_CHANNEL2', '-1002236085774')
+req1 = environ.get('REQ_CHANNEL1', '-1002246047085')
+req2 = environ.get('REQ_CHANNEL2', '-1002176177036')
 
 # Bot information
 SESSION = environ.get('SESSION', 'Media_search')
-API_ID = int(environ['API_ID'3498443])
-API_HASH = environ['API_HASH'a56201037892246f8f70b7526602172d]
-BOT_TOKEN = environ['BOT_TOKEN']
+API_ID = int(environ.get("API_ID", "4941681"))
+API_HASH = environ.get("API_HASH", "de387d3c20c8c4e8357169c4681d119a")
+BOT_TOKEN = environ.get("BOT_TOKEN", "5420501985:AAFV7KCd3S-Cb_KQO15m4ch1EVoiGPqYXAg")
 
 # Bot settings
 CACHE_TIME = int(environ.get('CACHE_TIME', 300))
@@ -25,35 +26,37 @@ USE_CAPTION_FILTER = bool(environ.get('USE_CAPTION_FILTER', False))
 PICS = (environ.get('PICS', 'https://te.legra.ph/file/4b49025befb1fa80fb6eb.jpg')).split()
 
 # Admins, Channels & Users
-ADMINS = [int(admin) if id_pattern.search(admin) else admin for admin in environ.get('ADMINS', '848206165').split()]
-CHANNELS = [int(ch) if id_pattern.search(ch) else ch for ch in environ.get('CHANNELS', '-1001899836262').split()]
+ADMINS = [int(admin) if id_pattern.search(admin) else admin for admin in environ.get('ADMINS', '6754405215 1875977504').split()]
+CHANNELS = [int(ch) if id_pattern.search(ch) else ch for ch in environ.get('CHANNELS', '-1001572484937 -1001515011337 -1001481638340').split()]
 auth_users = [int(user) if id_pattern.search(user) else user for user in environ.get('AUTH_USERS', '').split()]
 AUTH_USERS = (auth_users + ADMINS) if auth_users else []
 auth_grp = environ.get('AUTH_GROUP')
+AUTH_GROUPS = [int(ch) for ch in auth_grp.split()] if auth_grp else None
+
 REQ_CHANNEL1 = int(req1) if req1 and id_pattern.search(req1) else None
 REQ_CHANNEL2 = int(req2) if req2 and id_pattern.search(req2) else None
 AUTH_GROUPS = [int(ch) for ch in auth_grp.split()] if auth_grp else None
 
 # MongoDB information
-DATABASE_URI = environ.get('DATABASE_URI', "mongodb+srv://athulrajkr791:Rashmika@cluster0.xa9kwx2.mongodb.net/?retryWrites=true&w=majority")
-DATABASE_NAME = environ.get('DATABASE_NAME', "Vikram")
+DATABASE_URI = environ.get('DATABASE_URI', "mongodb+srv://punk13:punk13@punk1.fy04w9g.mongodb.net/?retryWrites=true&w=majority")
+DATABASE_NAME = environ.get('DATABASE_NAME', "Punk1")
 COLLECTION_NAME = environ.get('COLLECTION_NAME', 'Telegram_files')
 
 # Others
-LOG_CHANNEL = int(environ.get('LOG_CHANNEL', -1002016563274))
-SUPPORT_CHAT = environ.get('SUPPORT_CHAT', 'MMAssistBot')
-P_TTI_SHOW_OFF = is_enabled((environ.get('P_TTI_SHOW_OFF', "False")), False)
+LOG_CHANNEL = int(environ.get('LOG_CHANNEL', '-1001592604655'))
+SUPPORT_CHAT = environ.get('SUPPORT_CHAT', 'TomxSupport')
+P_TTI_SHOW_OFF = is_enabled((environ.get('P_TTI_SHOW_OFF', "True")), True)
 IMDB = is_enabled((environ.get('IMDB', "False")), False)
-SINGLE_BUTTON = is_enabled((environ.get('SINGLE_BUTTON', "False")), False)
-CUSTOM_FILE_CAPTION = environ.get("CUSTOM_FILE_CAPTION", "@Movie_Meadia <code>{file_name}</code> \n\n 𝗠𝗢𝗩𝗜𝗘 𝗚𝗥𝗢𝗨𝗣 \n @MM_Archives")
-BATCH_FILE_CAPTION = environ.get("BATCH_FILE_CAPTION", "@Movie_Meadia <code>{file_name}</code> \n\n 𝗠𝗢𝗩𝗜𝗘 𝗚𝗥𝗢𝗨𝗣 \n\n @MM_Archives")
-IMDB_TEMPLATE = environ.get("IMDB_TEMPLATE", "<b>Query: {query}</b> \n‌‌‌‌IMDb Data:\n\n🏷 Title: <a href={url}>{title}</a>\n🎭 Genres: {genres}\n📆 Year: <a href={url}/releaseinfo>{year}</a>\n🌟 Rating: <a href={url}/ratings>{rating}</a> / 10")
+SINGLE_BUTTON = is_enabled((environ.get('SINGLE_BUTTON', "True")), True)
+CUSTOM_FILE_CAPTION = environ.get("CUSTOM_FILE_CAPTION", f"{script.CAPTION}")
+BATCH_FILE_CAPTION = environ.get("BATCH_FILE_CAPTION", CUSTOM_FILE_CAPTION)
+IMDB_TEMPLATE = environ.get("IMDB_TEMPLATE", f"{script.IMDB}")
 LONG_IMDB_DESCRIPTION = is_enabled(environ.get("LONG_IMDB_DESCRIPTION", "False"), False)
 SPELL_CHECK_REPLY = is_enabled(environ.get("SPELL_CHECK_REPLY", "True"), True)
 MAX_LIST_ELM = environ.get("MAX_LIST_ELM", None)
 INDEX_REQ_CHANNEL = int(environ.get('INDEX_REQ_CHANNEL', LOG_CHANNEL))
 FILE_STORE_CHANNEL = [int(ch) for ch in (environ.get('FILE_STORE_CHANNEL', '')).split()]
-MELCOW_NEW_USERS = is_enabled((environ.get('MELCOW_NEW_USERS', "False")), False)
+MELCOW_NEW_USERS = is_enabled((environ.get('MELCOW_NEW_USERS', "True")), True)
 PROTECT_CONTENT = is_enabled((environ.get('PROTECT_CONTENT', "False")), False)
 PUBLIC_FILE_STORE = is_enabled((environ.get('PUBLIC_FILE_STORE', "True")), True)
 
