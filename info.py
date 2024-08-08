@@ -11,8 +11,8 @@ def is_enabled(value, default):
     else:
         return default
 
-req1 = environ.get('REQ_CHANNEL1', '-1002246047085')
-req2 = environ.get('REQ_CHANNEL2', '-1002176177036')
+req1 = environ.get('REQ_CHANNEL1')
+req2 = environ.get('REQ_CHANNEL2')
 
 # Bot information
 SESSION = environ.get('SESSION', 'Media_search')
