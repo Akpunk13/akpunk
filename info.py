@@ -11,8 +11,8 @@ def is_enabled(value, default):
     else:
         return default
 
-req1 = environ.get('REQ_CHANNEL1')
-req2 = environ.get('REQ_CHANNEL2')
+REQ_CHANNEL1 = environ.get('REQ_CHANNEL1')
+REQ_CHANNEL2 = environ.get('REQ_CHANNEL2')
 
 # Bot information
 SESSION = environ.get('SESSION', 'Media_search')
@@ -33,8 +33,8 @@ AUTH_USERS = (auth_users + ADMINS) if auth_users else []
 auth_grp = environ.get('AUTH_GROUP')
 AUTH_GROUPS = [int(ch) for ch in auth_grp.split()] if auth_grp else None
 
-REQ_CHANNEL1 = int(req1) if req1 and id_pattern.search(req1) else None
-REQ_CHANNEL2 = int(req2) if req2 and id_pattern.search(req2) else None
+REQ_CHANNEL1 = int(REQ_CHANNEL1) if REQ_CHANNEL1 and id_pattern.search(REQ_CHANNEL1) else None
+REQ_CHANNEL2 = int(REQ_CHANNEL2) if REQ_CHANNEL2 and id_pattern.search(REQ_CHANNEL2) else None
 AUTH_GROUPS = [int(ch) for ch in auth_grp.split()] if auth_grp else None
 
 # MongoDB information
