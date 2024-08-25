@@ -13,7 +13,7 @@ Mʏ Nᴀᴍᴇ Is <a href=https://t.me/{}>{}</a>, I Cᴀɴ Pʀᴏᴠɪᴅᴇ M�
 ✯ Bᴜɪʟᴅ Sᴛᴀᴛᴜs: v2.7.1 [ Sᴛᴀʙʟᴇ ]</b>"""
     SOURCE_TXT = """<b>NOTE:
 ⚠️ᴛʜɪꜱ ʙᴏᴛ ɪꜱ ᴀɴ ᴏᴘᴇɴ ꜱᴏᴜʀᴄᴇ ᴘʀᴏᴊᴇᴄᴛ
-◆ ꜱᴏᴜʀᴄᴇ ᴄᴏᴅᴇ : <a href=https://t.me/puthanpadam3>ʜᴇʀᴇ</a>
+◆ ꜱᴏᴜʀᴄᴇ ᴄᴏᴅᴇ : <a href=https://t.me/puthanpadamtg>ʜᴇʀᴇ</a>
 ◆ ᴅᴇᴠs 1 : <a href='https://t.me/akpunk13'>ADMIN1</a>
 ◆ ᴅᴇᴠs 2 : <a href='https://t.me/puthanpadamadmin'>ADMIN2</a></b>"""
     MANUELFILTER_TXT = """ʜᴇʟᴘ: <b>ꜰɪʟᴛᴇʀꜱ</b>
@@ -111,8 +111,8 @@ Nᴀᴍᴇ - {}"""
 
 🔘{file_size}
 
-Join For Movie Request : @puthanpadam3 😘
 Join For Movie Request : @puthanpadamtg 😘
+Join For Movie Request : @puthanpadamfour 😘
 Join For Movie Updates : @puthuputhanpadam3 😍 
 Follow For New Releases : 
 https://instagram.com/puthanpadamupdate?igshid=YmMyMTA2M2Y= 🥰 
