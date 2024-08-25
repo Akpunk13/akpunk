@@ -11,6 +11,7 @@ class Database:
         self.grp = self.db.group
         self.req_one = self.db.reqone
         self.req_two = self.db.reqtwo
+        self.adm = self.db.admins
 
 
     def new_user(self, id, name):
@@ -183,5 +184,31 @@ class Database:
         async for req in self.req_two.find({}):
             count += 1
         return count
+        
+    async def get_loadout(self, id: int):
+        data = await self.adm.find_one({'id': id})
+        if not data:
+            data = {
+               'id' : id, 
+               'channel1' : None,
+               'channel2' : None
+            }
+        else:
+            channel1 = data.get('channel1')
+            if not channel1:
+                channel1 = None
+            channel2 = data.get('channel2')
+            if not channel2:
+                channel2 = None
+            data = {
+               'id' : id, 
+               'channel1' : channel1,
+               'channel2' : channel2
+            }
+        print("New Loadout Created....")
+        return data
+
+    async def update_loadout(self, key, value, id: int):
+        await self.adm.update_one({'id': id}, {'$set': {key: value}})
         
 db = Database(DATABASE_URI, DATABASE_NAME)
