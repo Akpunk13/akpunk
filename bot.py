@@ -12,9 +12,9 @@ from pyrogram.raw.all import layer
 from database.ia_filterdb import Media
 from database.users_chats_db import db
 from info import SESSION, API_ID, API_HASH, BOT_TOKEN, LOG_STR, REQ_CHANNEL1, REQ_CHANNEL2
-from utils import temp
 from typing import Union, Optional, AsyncGenerator
 from pyrogram import types
+from utils import temp, load_datas
 from aiohttp import web
 from plugins import web_server
 PORT = "8080"
@@ -39,6 +39,7 @@ class Bot(Client):
         await super().start()
         await Media.ensure_indexes()
         me = await self.get_me()
+        from utils import temp, load_datas
         temp.ME = me.id
         temp.U_NAME = me.username
         temp.B_NAME = me.first_name
@@ -48,19 +49,21 @@ class Bot(Client):
         bind_address = "0.0.0.0"
         await web.TCPSite(app, bind_address, PORT).start()
         logging.info(f"{me.first_name} with for Pyrogram v{__version__} (Layer {layer}) started on {me.username}.")
-        logging.info(LOG_STR)
-        if REQ_CHANNEL1:
+        if temp.REQ_CHANNEL1:
             try:
-                _link = await self.create_chat_invite_link(chat_id=REQ_CHANNEL1, creates_join_request=True)
-                self.req_link1 = _link.invite_link
-            except Exception as e:
-                logging.info(f"Make Sure REQ_CHANNEL 1 ID is correct or {e}")
-        if REQ_CHANNEL2:
+                req_link1 = await self.create_chat_invite_link(chat_id=temp.REQ_CHANNEL1, creates_join_request=True)
+            except ChatAdminRequired:
+                logger.error("Make sure Bot is admin in Forcesub channel") 
+            self.join_link = req_link1.invite_link
+            logging.info(f"ForceSub set as {temp.REQ_CHANNEL1}")
+            
+        if temp.REQ_CHANNEL2:
             try:
-                _link = await self.create_chat_invite_link(chat_id=REQ_CHANNEL2, creates_join_request=True)
-                self.req_link2 = _link.invite_link
-            except Exception as e:
-                logging.info(f"Make Sure REQ_CHANNEL 2 ID is correct or {e}")
+                req_link2 = await self.create_chat_invite_link(chat_id=temp.REQ_CHANNEL2, creates_join_request=True)
+            except ChatAdminRequired:
+                logger.error("Make sure Bot is admin in Forcesub channel") 
+            self.join_link = req_link2.invite_link
+            logging.info(f"ForceSub set as {temp.REQ_CHANNEL2}")
                 
     async def stop(self, *args):
         await super().stop()
