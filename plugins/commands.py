@@ -9,13 +9,17 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from database.ia_filterdb import Media, get_file_details, unpack_new_file_id
 from database.users_chats_db import db
 from info import CHANNELS, ADMINS, REQ_CHANNEL1, REQ_CHANNEL2, LOG_CHANNEL, PICS, BATCH_FILE_CAPTION, CUSTOM_FILE_CAPTION, PROTECT_CONTENT
-from utils import get_settings, get_size, is_requested_one, is_requested_two, save_group_settings, temp
+from utils import get_settings, get_size, is_requested_one, is_requested_two, save_group_settings, temp, check_loop_sub, check_loop_sub1, check_loop_sub2
 from database.connections_mdb import active_connection
 import re
 import json
 import base64
 logger = logging.getLogger(__name__)
+should_run_check_loop_sub = False
+should_run_check_loop_sub1 = False
+FSUB_MSG = """𝙷𝚎𝚢 {} 😍, 
 
+𝚈𝚘𝚞 𝙽𝚎𝚎𝚍 𝚃𝚘 𝙹𝚘𝚒𝚗 𝙼𝚢 𝚄𝚙𝚍𝚊𝚝𝚎𝚜 𝙲𝚑𝚊𝚗𝚗𝚎𝚕𝚜 𝙵𝚒𝚛𝚜𝚝, 𝚃𝚑𝚎𝚗 𝚈𝚘𝚞 𝚆𝚒𝚕𝚕 𝙶𝚎𝚝 𝚈𝚘𝚞𝚛 𝙼𝚘𝚟𝚒𝚎 𝙰𝚞𝚝𝚘𝚖𝚊𝚝𝚒𝚌𝚊𝚕𝚕𝚢..!!"""
 BATCH_FILES = {}
 
 @Client.on_message(filters.command("start") & filters.incoming)
@@ -60,56 +64,71 @@ async def start(client, message):
             parse_mode=enums.ParseMode.HTML
         )
         return
-    if REQ_CHANNEL1 and not await is_requested_one(client, message):
+        
+    if temp.REQ_CHANNEL1 and not await is_requested_one(client, message):
         btn = [[
             InlineKeyboardButton(
-                "〄 Rᴇǫᴜᴇsᴛ Tᴏ Jᴏɪɴ Cʜᴀɴɴᴇʟ 1 〄", url=client.req_link1)
+                "𝗝𝗢𝗜𝗡 𝗖𝗛𝗔𝗡𝗡𝗘𝗟 𝟭", url=client.req_link1)
         ]]
+        should_run_check_loop_sub1 = True
         try:
-            if REQ_CHANNEL2 and not await is_requested_two(client, message):
+            if temp.REQ_CHANNEL2 and not await is_requested_two(client, message):
                 btn.append(
                       [
                     InlineKeyboardButton(
-                        "〄 Rᴇǫᴜᴇsᴛ Tᴏ Jᴏɪɴ Cʜᴀɴɴᴇʟ 2 〄", url=client.req_link2)
+                        "𝗝𝗢𝗜𝗡 𝗖𝗛𝗔𝗡𝗡𝗘𝗟 𝟮", url=client.req_link2)
                       ]
                 )
+                should_run_check_loop_sub = True
         except Exception as e:
-            print(e)
+            print(e)            
         if message.command[1] != "subscribe":
             try:
                 kk, file_id = message.command[1].split("_", 1)
                 pre = 'checksubp' if kk == 'filep' else 'checksub' 
-                btn.append([InlineKeyboardButton("〄 Tʀʏ Aɢᴀɪɴ 〄", callback_data=f"{pre}#{file_id}")])
+                btn.append([InlineKeyboardButton("Tʀʏ Aɢᴀɪɴ ⥁", callback_data=f"{pre}#{file_id}")])
             except (IndexError, ValueError):
-                btn.append([InlineKeyboardButton("〄 Tʀʏ Aɢᴀɪɴ 〄", url=f"https://t.me/{temp.U_NAME}?start={message.command[1]}")])
-        await client.send_message(
+                btn.append([InlineKeyboardButton("Tʀʏ Aɢᴀɪɴ ⥁", url=f"https://t.me/{temp.U_NAME}?start={message.command[1]}")])
+        sh = await client.send_message(
             chat_id=message.from_user.id,
-            text='📢 𝐑𝐞𝐪𝐮𝐞𝐬𝐭 𝐓𝐨 𝐉𝐨𝐢𝐧 𝐂𝐡𝐚𝐧𝐧𝐞𝐥 📢  ക്ലിക്ക് ചെയ്ത ശേഷം 🔄 𝐓𝐫𝐲 𝐀𝐠𝐚𝐢𝐧 🔄 എന്ന ബട്ടണിൽ അമർത്തിയാൽ നിങ്ങൾക്ക് ഞാൻ ആ സിനിമ അയച്ചു തരുന്നതാണ് 😍',
+            text=FSUB_MSG.format(message.from_user.mention),
             reply_markup=InlineKeyboardMarkup(btn),
-            parse_mode=enums.ParseMode.MARKDOWN
+            parse_mode=enums.ParseMode.DEFAULT
             )
-        return
+        if should_run_check_loop_sub:
+            check = await check_loop_sub(client, message)
+        elif should_run_check_loop_sub1:
+            check = await check_loop_sub1(client, message)
+        if check:     
+            await sh.delete()                
+        else:
+            return 
+        
 
-    if REQ_CHANNEL2 and not await is_requested_two(client, message):
+    if temp.REQ_CHANNEL2 and not await is_requested_two(client, message):
         btn = [[
             InlineKeyboardButton(
-                "Join channel", url=client.req_link2)
+                "𝗝𝗢𝗜𝗡 𝗖𝗛𝗔𝗡𝗡𝗘𝗟 𝟮", url=client.req_link2)
         ]]
         if message.command[1] != "subscribe":
             try:
                 kk, file_id = message.command[1].split("_", 1)
                 pre = 'checksubp' if kk == 'filep' else 'checksub' 
-                btn.append([InlineKeyboardButton(" 🔄 Tʀʏ Aɢᴀɪɴ 🔄", callback_data=f"{pre}#{file_id}")])
+                btn.append([InlineKeyboardButton("Tʀʏ Aɢᴀɪɴ ⥁", callback_data=f"{pre}#{file_id}")])
             except (IndexError, ValueError):
-                btn.append([InlineKeyboardButton(" 🔄 Tʀʏ Aɢᴀɪɴ 🔄", url=f"https://t.me/{temp.U_NAME}?start={message.command[1]}")])
-        await client.send_message(
+                btn.append([InlineKeyboardButton("Tʀʏ Aɢᴀɪɴ ⥁", url=f"https://t.me/{temp.U_NAME}?start={message.command[1]}")])
+        sh = await client.send_message(
             chat_id=message.from_user.id,
-            text="Request To Join This Channel",
+            text=FSUB_MSG.format(message.from_user.mention),
             reply_markup=InlineKeyboardMarkup(btn),
-            parse_mode=enums.ParseMode.MARKDOWN
+            parse_mode=enums.ParseMode.DEFAULT
         )
-        return
-
+        check = await check_loop_sub2(client, message)
+        if check:
+            await sh.delete()
+        else:
+            return
+            
     if len(message.command) == 2 and message.command[1] in ["subscribe", "error", "okay", "help"]:
         buttons = [[
             InlineKeyboardButton('⚚ ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ⚚', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
