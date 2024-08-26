@@ -39,7 +39,7 @@ class Bot(Client):
         await super().start()
         await Media.ensure_indexes()
         me = await self.get_me()
-        from utils import temp, load_datas
+        await load_datas(me.id)
         temp.ME = me.id
         temp.U_NAME = me.username
         temp.B_NAME = me.first_name
