@@ -113,7 +113,7 @@ Nᴀᴍᴇ - {}"""
 
 Join For Movie Request : @puthanpadamtg 😘
 Join For Movie Request : @puthanpadamfour 😘
-Join For Movie Updates : @puthuputhanpadam3 😍 
+Join For Movie Updates : @puthuputhanpadammain 😍 
 Follow For New Releases : 
 https://instagram.com/puthanpadamupdate?igshid=YmMyMTA2M2Y= 🥰 
 Plz Subscribe Our Youtube Channel : https://youtube.com/channel/UCgbv-kTsrrA_p7aOAxirkuA ❤️‍🔥
