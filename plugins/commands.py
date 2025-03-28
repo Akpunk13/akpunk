@@ -48,13 +48,13 @@ async def start(client, message):
         buttons = [[
             InlineKeyboardButton('⚚ ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ⚚', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
             ],[
-            InlineKeyboardButton('ᴍᴏᴠɪᴇ ɢʀᴏᴜᴘ', url='https://t.me/puthanpadam3'),
+            InlineKeyboardButton('ᴍᴏᴠɪᴇ ɢʀᴏᴜᴘ', url='https://t.me/puthanpadamtg2'),
             InlineKeyboardButton('♚ ᴏᴡɴᴇʀ ♚', url='https://t.me/akpunk13')
             ],[      
             InlineKeyboardButton('〄 ʜᴇʟᴘ 〄', callback_data='help'),
             InlineKeyboardButton('⍟ ᴀʙᴏᴜᴛ ⍟', callback_data='about')
             ],[
-            InlineKeyboardButton('⌬ ᴜᴘᴅᴀᴛᴇs ⌬', url='https://t.me/puthuputhanpadam3')
+            InlineKeyboardButton('⌬ ᴜᴘᴅᴀᴛᴇs ⌬', url='https://t.me/puthuputhanpadammain')
         ]]         
         reply_markup = InlineKeyboardMarkup(buttons)
         await message.reply_photo(
@@ -133,13 +133,13 @@ async def start(client, message):
         buttons = [[
             InlineKeyboardButton('⚚ ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ⚚', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
             ],[
-            InlineKeyboardButton('ᴍᴏᴠɪᴇ ɢʀᴏᴜᴘ', url='https://t.me/puthanpadam3'),
+            InlineKeyboardButton('ᴍᴏᴠɪᴇ ɢʀᴏᴜᴘ', url='https://t.me/puthanpadamtg2'),
             InlineKeyboardButton('♚ ᴏᴡɴᴇʀ ♚', url='https://t.me/akpunk13')
             ],[      
             InlineKeyboardButton('〄 ʜᴇʟᴘ 〄', callback_data='help'),
             InlineKeyboardButton('⍟ ᴀʙᴏᴜᴛ ⍟', callback_data='about')
             ],[
-            InlineKeyboardButton('⌬ ᴜᴘᴅᴀᴛᴇs ⌬', url='https://t.me/puthuputhanpadam3')
+            InlineKeyboardButton('⌬ ᴜᴘᴅᴀᴛᴇs ⌬', url='https://t.me/puthuputhanpadammain')
         ]]         
         reply_markup = InlineKeyboardMarkup(buttons)
         await message.reply_photo(
